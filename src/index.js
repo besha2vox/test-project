@@ -33,15 +33,18 @@ function render() {
   const storageTheme = localStorage.getItem(THEME_STORAGE_KEY);
 
   if (storageTheme === Theme.DARK) {
-    refs.themeSwitch.setAttribute('checked', 'checked');
-    document.body.classList.add('dark-theme');
-    document.body.classList.remove('light-theme');
+    refs.themeSwitch.setAttribute('checked', true);
+    addClassForBody('dark-theme', 'light-theme');
   }
 
   if (storageTheme === Theme.LIGHT || !storageTheme) {
-    document.body.classList.add('light-theme');
-    document.body.classList.remove('dark-theme');
+    addClassForBody('light-theme', 'dark-theme');
   }
+}
+
+function addClassForBody(add, remove) {
+  document.body.classList.add(add);
+  document.body.classList.remove(remove);
 }
 
 const template = data.map(el => templateFunction(el)).join('');
